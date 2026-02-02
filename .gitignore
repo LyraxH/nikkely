@@ -1,2 +1,25 @@
-.dbeaver
+# Dependencies
+node_modules/
+dist/
+
+# SQLite
+*.db
+*.db-journal
+*.db-wal
+
+# Environment / Secret files
+.env
+.env.local
+
+# Build/TypeScript files
+*.js.map
+*.d.ts
+.tsbuildinfo
+
+# OS Metadata
+.DS_Store
+Thumbs.db
+
+# Tool specific
+.dbeaver/
 .project

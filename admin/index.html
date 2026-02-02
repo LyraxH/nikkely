@@ -50,8 +50,6 @@
     <div class="content">
         <div class="nikkes">
             <form id="nikkeForm">
-                <label>Name:</label> <br>
-                <input type="text" id="name" placeholder="Name" required><br><br>
                 <div class="button-group" id="rarity-group">
                     <label>Rarity:</label> <br>
                     <button type="button" data-value="1"><img src="/images/r.webp" width="48" height="48"></button>
@@ -59,14 +57,24 @@
                     <button type="button" data-value="3"><img src="/images/ssr.webp" width="48" height="48"></button>
                     <input type="hidden" id="rarity" value="3"> 
                 </div>
-                <div class="button-group" id="manufacturer-group">
-                    <label>Manufacturer:</label> <br>
-                    <button type="button" data-value="Abnormal"><img src="/images/abnormal.webp" width="48" height="48"></button>
-                    <button type="button" data-value="Elysion"><img src="/images/elysion.webp" width="48" height="48"></button>
-                    <button type="button" data-value="Tetra"><img src="/images/tetra.webp" width="48" height="48"></button>
-                    <button type="button" data-value="Missilis"><img src="/images/missilis.webp" width="48" height="48"></button>
-                    <button type="button" data-value="Pilgrim"><img src="/images/pilgrim.webp" width="40" height="48"></button>
-                    <input type="hidden" id="manufacturer" value="Abnormal"> 
+                <label>Name:</label> <br>
+                <input type="text" id="name" placeholder="Name" required><br><br>
+                <div class="button-group" id="weapon-group">
+                    <label>Weapon:</label> <br>
+                    <button type="button" data-value="AR"><img src="/images/ar.webp" width="48" height="48"></button>
+                    <button type="button" data-value="MG"><img src="/images/mg.webp" width="48" height="48"></button>
+                    <button type="button" data-value="RL"><img src="/images/rl.webp" width="48" height="48"></button>
+                    <button type="button" data-value="SG"><img src="/images/sg.webp" width="48" height="48"></button>
+                    <button type="button" data-value="SMG"><img src="/images/smg.webp" width="48" height="48"></button>
+                    <button type="button" data-value="SR"><img src="/images/wsr.webp" width="60" height="48"></button>
+                    <input type="hidden" id="weapon" value="SMG"> 
+                </div>
+                <div class="button-group" id="role-group">
+                    <label>Role:</label> <br>
+                    <button type="button" data-value="Attacker"><img src="/images/attacker.webp" width="48" height="48"></button>
+                    <button type="button" data-value="Defender"><img src="/images/defender.webp" width="48" height="48"></button>
+                    <button type="button" data-value="Supporter"><img src="/images/supporter.webp" width="48" height="48"></button>
+                    <input type="hidden" id="role" value="Attacker"> 
                 </div>
                 <div class="button-group" id="element-group">
                     <label>Element:</label> <br>
@@ -85,22 +93,14 @@
                     <button type="button" data-value="4"><img src="/images/b4.webp" width="48" height="48"></button>
                     <input type="hidden" id="burst" value="1"> 
                 </div>
-                <div class="button-group" id="role-group">
-                    <label>Role:</label> <br>
-                    <button type="button" data-value="Attacker"><img src="/images/attacker.webp" width="48" height="48"></button>
-                    <button type="button" data-value="Defender"><img src="/images/defender.webp" width="48" height="48"></button>
-                    <button type="button" data-value="Supporter"><img src="/images/supporter.webp" width="48" height="48"></button>
-                    <input type="hidden" id="role" value="Attacker"> 
-                </div>
-                <div class="button-group" id="weapon-group">
-                    <label>Weapon:</label> <br>
-                    <button type="button" data-value="AR"><img src="/images/ar.webp" width="48" height="48"></button>
-                    <button type="button" data-value="MG"><img src="/images/mg.webp" width="48" height="48"></button>
-                    <button type="button" data-value="RL"><img src="/images/rl.webp" width="48" height="48"></button>
-                    <button type="button" data-value="SG"><img src="/images/sg.webp" width="48" height="48"></button>
-                    <button type="button" data-value="SMG"><img src="/images/smg.webp" width="48" height="48"></button>
-                    <button type="button" data-value="SR"><img src="/images/wsr.webp" width="60" height="48"></button>
-                    <input type="hidden" id="weapon" value="SMG"> 
+                <div class="button-group" id="manufacturer-group">
+                    <label>Manufacturer:</label> <br>
+                    <button type="button" data-value="Abnormal"><img src="/images/abnormal.webp" width="48" height="48"></button>
+                    <button type="button" data-value="Elysion"><img src="/images/elysion.webp" width="48" height="48"></button>
+                    <button type="button" data-value="Tetra"><img src="/images/tetra.webp" width="48" height="48"></button>
+                    <button type="button" data-value="Missilis"><img src="/images/missilis.webp" width="48" height="48"></button>
+                    <button type="button" data-value="Pilgrim"><img src="/images/pilgrim.webp" width="40" height="48"></button>
+                    <input type="hidden" id="manufacturer" value="Abnormal"> 
                 </div>
                 <label>Squad: </label> <br>
                 <input type="text" id="squad" placeholder="Squad"><br><br>

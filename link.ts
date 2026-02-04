@@ -72,6 +72,10 @@ if (skillForm) {
                 }
                 return;
             }
+            console.log("Skill added!");
+            (document.getElementById('skill-name') as HTMLInputElement).value = '';
+            (document.getElementById('skill-description') as HTMLInputElement).value = '';
+            fetchData();
         } catch (error) {
             console.error("Error during submission:", error);
         }

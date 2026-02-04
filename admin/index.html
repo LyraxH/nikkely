@@ -115,8 +115,6 @@
         <form id="skillForm" style="display: none;">
             <label>Nikke: </label> <br>
             <input type="text" id="nikke-name" required placeholder="Nikke"><br><br>
-            <label>Skill Name: </label> <br>
-            <input type="text" id="skill-name" required placeholder="Skill Name"><br><br>
             <label>Skill:</label> <br>
             <div class="button-group" id="skill-type">
                 <button type="button" data-value="1">Skill 1</button>
@@ -127,16 +125,22 @@
             <label>Skill Cooldown:</label> <br>
             <div class="button-group" id="skill-cooldown">
                 <button type="button" data-value="Passive">Passive</button>
+                <button type="button" data-value="20">20s</button>
+                <button type="button" data-value="40">40s</button>
+                <button type="button" data-value="60">60s</button><br>
+                <!--
                 <button type="button" data-value="4">4s</button>
                 <button type="button" data-value="10">10s</button>
                 <button type="button" data-value="15">15s</button>
-                <button type="button" data-value="20">20s</button>
-                <button type="button" data-value="40">40s</button>
-                <button type="button" data-value="60">60s</button>
+                -->
                 <button type="button" data-value="other">Other</button>
                 <input type="hidden" id="cooldown" placeholder="Passive"><br><br>
             </div>
-            <input type="text" id="skill-description" placeholder="Description"><br><br>
+
+            <label>Skill Name: </label> <br>
+            <input type="text" id="skill-name" required placeholder="Skill Name" style="width: 300px; height: 100px"><br><br>
+            <label>Skill Description: </label> <br>
+            <input type="text" id="skill-description" placeholder="Description" style="width: 300px; height: 150px"><br><br>
             <button type="submit">add skill</button>
         </form>
     </div>

@@ -1,5 +1,5 @@
 interface Nikke {
-    id?: number;
+    nikke_id?: number;
     name: string;
     rarity: number;
     manufacturer: string;
@@ -17,8 +17,8 @@ async function fetchData(): Promise<void> {
         const listElement = document.getElementById('nikkes');
         if (!listElement) return;
         listElement.innerHTML = data.map(nikke => {
-            const rarityMap: Record<number, string> = { 1: 'r', 2: 'sr', 3: 'ssr' };
-            const rarityName = rarityMap[Number(nikke.rarity)] || 'ssr';
+            const rarityKey: Record<number, string> = { 1: 'r', 2: 'sr', 3: 'ssr' };
+            const rarityName = rarityKey[Number(nikke.rarity)] || 'ssr';
             return `
                 <div class="card">
                     <h2>${nikke.name}</h2>
@@ -29,7 +29,7 @@ async function fetchData(): Promise<void> {
                     <img src="/images/${nikke.role.toLowerCase()}.webp" width="40" height="48" title="${nikke.role}">
                     <img src="/images/${nikke.weapon.toLowerCase()}.webp" width="48" height="48" title="${nikke.weapon}">
                     <p><b>Squad:</b> ${nikke.squad}</p>
-                    <button class="delete-btn" onclick="deleteNikke(${nikke.id})">
+                    <button class="delete-btn" onclick="deleteNikke(${nikke.nikke_id})">
                         <i class="fa fa-trash"></i> Delete
                     </button>
                 </div>
@@ -39,10 +39,47 @@ async function fetchData(): Promise<void> {
         console.error("Failed to fetch:", error);
     }
 }
-
-const form = document.getElementById('nikkeForm') as HTMLFormElement;
-if (form) {
-    form.addEventListener('submit', async (e) => {
+const skillForm = document.getElementById('skillForm') as HTMLFormElement;
+if (skillForm) {
+    skillForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const nikkeName = (document.getElementById('nikke-name') as HTMLInputElement).value;
+        try {
+            const idResponse = await fetch(`http://localhost:3000/nikke-by-name/${encodeURIComponent(nikkeName)}`);
+            if (!idResponse.ok) {
+                alert("Nikke not found! Please check the name.");
+                return;
+            }
+            const { nikke_id } = await idResponse.json();
+            const payload = {
+                nikke_id: nikke_id,
+                skill_name: (document.getElementById('skill-name') as HTMLInputElement).value,
+                type: (document.getElementById('type') as HTMLInputElement).value,
+                cooldown: (document.getElementById('cooldown') as HTMLInputElement).value,
+                description: (document.getElementById('skill-description') as HTMLInputElement).value,
+            };
+            const response = await fetch('http://localhost:3000/skills', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (!response.ok) {
+                const errorData = await response.json();
+                if (errorData.error.includes("UNIQUE constraint failed")) {
+                    alert("This Nikke already has a skill assigned to this slot (Skill 1, 2, or Burst).");
+                } else {
+                    alert("Error adding skill: " + errorData.error);
+                }
+                return;
+            }
+        } catch (error) {
+            console.error("Error during submission:", error);
+        }
+    });
+}
+const nikkeForm = document.getElementById('nikkeForm') as HTMLFormElement;
+if (nikkeForm) {
+    nikkeForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const payload = {
             name: (document.getElementById('name') as HTMLInputElement).value,
@@ -54,7 +91,6 @@ if (form) {
             weapon: (document.getElementById('weapon') as HTMLInputElement).value,
             squad: (document.getElementById('squad') as HTMLInputElement).value,
         };
-        
         try {
             const response = await fetch('http://localhost:3000/nikkes', {
                 method: 'POST',
@@ -63,7 +99,7 @@ if (form) {
             });
             if (response.ok) {
                 console.log("Nikke added!");
-                form.reset();
+                nikkeForm.reset();
                 fetchData();
             }
         } catch (error) {
@@ -92,9 +128,7 @@ function setupButtonGroup(groupId: string, inputId: string) {
     const group = document.getElementById(groupId);
     const hiddenInput = document.getElementById(inputId) as HTMLInputElement;
     if (!group || !hiddenInput) return;
-
     const buttons = group.querySelectorAll('button');
-
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {
             buttons.forEach(b => b.classList.remove('active'));
@@ -105,8 +139,11 @@ function setupButtonGroup(groupId: string, inputId: string) {
 }
 
 setupButtonGroup('rarity-group', 'rarity');
-setupButtonGroup('manufacturer-group', 'manufacturer');
+setupButtonGroup('weapon-group', 'weapon');
+setupButtonGroup('role-group', 'role');
 setupButtonGroup('element-group', 'element');
 setupButtonGroup('burst-group', 'burst');
-setupButtonGroup('role-group', 'role');
-setupButtonGroup('weapon-group', 'weapon');
+setupButtonGroup('manufacturer-group', 'manufacturer');
+
+setupButtonGroup('skill-type', 'type');
+setupButtonGroup('skill-cooldown', 'cooldown');
